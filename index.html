@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IUT International – Accueil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0080ff">
+
+  <style>
+    :root {
+      --vert-principal: #2a7c4f;
+      --vert-clair: #e6f3e9;
+      --text-dark: #2a4d2e;
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+    }
+
+    header {
+      background-color: var(--vert-principal);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-title img {
+      height: 60px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background-color: white;
+      color: var(--vert-principal);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    nav button:hover {
+      background-color: var(--vert-clair);
+      transform: translateY(-2px);
+    }
+
+    .lang-toggle, .dark-toggle, .burger {
+      background: transparent;
+      border: 1px solid white;
+      border-radius: 5px;
+      color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+      }
+      nav.active {
+        display: flex;
+      }
+      .burger {
+        display: flex;
+      }
+    }
+
+    .hero {
+      position: relative;
+      text-align: center;
+      color: white;
+      height: 500px;
+      overflow: hidden;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      animation: slide 15s infinite;
+    }
+
+    @keyframes slide {
+      0% {opacity: 1;}
+      33% {opacity: 0.5;}
+      66% {opacity: 0.5;}
+      100% {opacity: 1;}
+    }
+
+    .hero-content {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+
+    .hero-content .cta-buttons button {
+      margin: 5px;
+      padding: 12px 25px;
+      border-radius: 10px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: var(--vert-principal);
+      color: white;
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .hero-content .cta-buttons button:hover {
+      transform: translateY(-3px);
+      background-color: var(--vert-clair);
+    }
+
+    .sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .card {
+      background-color: var(--bg-light);
+      border: 1px solid #d8eedd;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    body.dark-mode .card {
+      background-color: #1e1e1e;
+      border-color: #333;
+      box-shadow: 0 2px 5px rgba(255,255,255,0.05);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: var(--vert-principal);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--vert-principal);
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-title">
+      <img src="logo.png" alt="Logo Université Jean Monnet">
+      <h1 data-fr="IUT Jean Monnet – Guide International" data-en="Jean Monnet IUT – International Guide">IUT Jean Monnet – Guide International</h1>
+    </div>
+    <div class="burger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav id="mainNav">
+      <button data-fr="Accueil" data-en="Home" onclick="goToPage('index.html', this)">Accueil</button>
+      <button data-fr="Venir en France" data-en="Coming to France" onclick="goToPage('venir.html', this)">Venir en France</button>
+      <button data-fr="Logement" data-en="Housing" onclick="goToPage('logement.html', this)">Logement</button>
+      <button data-fr="Vie quotidienne" data-en="Daily Life" onclick="goToPage('vie.html', this)">Vie quotidienne</button>
+      <button data-fr="Contacts" data-en="Contacts" onclick="goToPage('contacts.html', this)">Contacts</button>
+      <button class="lang-toggle" onclick="toggleLang()">FR/EN</button>
+      <button class="dark-toggle" onclick="toggleDark()">🌙/☀</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <img src="https://cdn.pixabay.com/photo/2016/11/08/05/10/students-1807505_640.jpg" alt="Saint-Étienne campus">
+    <div class="hero-content">
+      <h1 data-fr="Bienvenue à Saint-Étienne" data-en="Welcome to Saint-Étienne">Bienvenue à Saint-Étienne</h1>
+      <p data-fr="Un guide complet pour accompagner votre arrivée et votre intégration à l'IUT Jean Monnet." data-en="A complete guide to help you arrive and integrate at Jean Monnet IUT.">Un guide complet pour accompagner votre arrivée et votre intégration à l'IUT Jean Monnet.</p>
+      <div class="cta-buttons">
+        <button onclick="goToPage('logement.html')" data-fr="Découvrir le logement" data-en="Explore Housing">Découvrir le logement</button>
+        <button onclick="goToPage('vie.html')" data-fr="Vie quotidienne" data-en="Daily Life">Vie quotidienne</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sections">
+    <div class="card">
+      <h3 data-fr="Avant votre arrivée" data-en="Before Arrival">Avant votre arrivée</h3>
+      <p data-fr="Informations essentielles : visa, documents, assurance, démarches administratives." data-en="Essential information: visa, documents, insurance, administrative procedures.">Informations essentielles : visa, documents, assurance, démarches administratives.</p>
+    </div>
+    <div class="card">
+      <h3 data-fr="Logement" data-en="Housing">Logement</h3>
+      <p data-fr="Résidences étudiantes, aides au logement, conseils pour s'installer sereinement." data-en="Student residences, housing aid, advice for settling in comfortably.">Résidences étudiantes, aides au logement, conseils pour s'installer sereinement.</p>
+    </div>
+    <div class="card">
+      <h3 data-fr="Vie quotidienne" data-en="Daily Life">Vie quotidienne</h3>
+      <p data-fr="Transports, santé, banques, téléphonie, activités et bons plans." data-en="Transport, health, banks, telephony, activities and tips.">Transports, santé, banques, téléphonie, activités et bons plans.</p>
+    </div>
+    <div class="card">
+      <h3 data-fr="Intégration" data-en="Integration">Intégration</h3>
+      <p data-fr="Événements, clubs, associations, rencontres internationales." data-en="Events, clubs, associations, international meetings.">Événements, clubs, associations, rencontres internationales.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 IUT Jean Monnet – Guide International</p>
+  </footer>
+
+  <script>
+    let currentLang = localStorage.getItem('lang') || 'fr';
+    document.addEventListener('DOMContentLoaded', () => {
+      translateAll();
+    });
+
+    function toggleDark() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    function toggleLang() {
+      currentLang = currentLang === 'fr' ? 'en' : 'fr';
+      localStorage.setItem('lang', currentLang);
+      translateAll();
+    }
+
+    function translate(element) {
+      if(currentLang === 'fr') element.innerText = element.dataset.fr;
+      else element.innerText = element.dataset.en;
+    }
+
+    function translateAll() {
+      document.querySelectorAll('[data-fr]').forEach(el => {
+        el.innerText = currentLang === 'fr' ? el.dataset.fr : el.dataset.en;
+      });
+    }
+
+    function toggleMenu() {
+      document.getElementById('mainNav').classList.toggle('active');
+    }
+
+    function goToPage(url, btn) {
+      localStorage.setItem('lang', currentLang);
+      window.location.href = url;
+    }
+	if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js")
+    .then(() => console.log("Service Worker enregistré"))
+    .catch((err) => console.log("Erreur SW:", err));
+}
+
+  </script>
+</body>
+</html>
